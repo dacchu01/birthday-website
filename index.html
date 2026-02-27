@@ -1,170 +1,700 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Thangameey 💖</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff;
+  :root {
+    --rose: #ff6b8a;
+    --blush: #ffb3c6;
+    --petal: #ffd6e0;
+    --cream: #fff8f9;
+    --deep: #c9184a;
+    --gold: #ffd700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--cream);
+    color: #5a1a2e;
     overflow-x: hidden;
-}
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><text y='20' font-size='20'>💖</text></svg>") 12 12, auto;
+  }
 
-/* Floating Hearts */
-.heart {
+  /* ─── Starfield Canvas ─── */
+  #petals-canvas {
     position: fixed;
-    bottom: -10px;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #ffe0ec 0%, #ffc2d4 40%, #ffb3c6 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.5) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,107,138,0.3) 0%, transparent 50%);
+  }
+
+  .sparkle-ring {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255,107,138,0.3);
+    animation: spin 20s linear infinite;
+  }
+
+  .sparkle-ring::before {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    left: 50%;
     font-size: 20px;
-    animation: floatUp 6s linear infinite;
-}
+  }
 
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Title */
-h1 {
-    margin-top: 60px;
-    font-size: 45px;
-}
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeUp 1.2s ease both;
+  }
 
-/* Gallery */
-.gallery {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .emoji-top {
+    font-size: 60px;
+    display: block;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 8vw, 80px);
+    color: var(--deep);
+    letter-spacing: 1px;
+    text-shadow: 0 4px 20px rgba(201,24,74,0.2);
+    line-height: 1.1;
+    margin: 10px 0;
+  }
+
+  .hero h1 span {
+    color: var(--rose);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: #c9184a;
+    opacity: 0.85;
+    margin-top: 10px;
+    animation: fadeUp 1.2s 0.3s ease both;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    font-size: 28px;
+    animation: pulse 1.5s infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.2); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--deep);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--blush));
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery-section {
+    background: linear-gradient(180deg, #fff0f3 0%, #ffe8ef 100%);
+  }
+
+  .gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
-    margin: 30px;
-}
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-.gallery img {
-    width: 250px;
-    height: 300px;
+  .photo-frame {
+    position: relative;
+    width: 240px;
+    height: 290px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(201,24,74,0.2);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(201,24,74,0.5) 100%);
+    z-index: 1;
+  }
+
+  .photo-frame:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 30px 70px rgba(201,24,74,0.35);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 20px;
-    transition: transform 0.4s;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
+    display: block;
+  }
 
-.gallery img:hover {
-    transform: scale(1.1);
-}
+  .photo-label {
+    position: absolute;
+    bottom: 12px;
+    left: 0; right: 0;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    z-index: 2;
+  }
 
-/* Love Letter */
-.letter {
-    background: rgba(255,255,255,0.2);
-    margin: 40px auto;
-    padding: 30px;
-    width: 70%;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    font-size: 20px;
-}
+  /* ─── LOVE LETTER ─── */
+  .letter-section {
+    background: linear-gradient(135deg, #fff4f7, #ffe8ef);
+  }
 
-/* Q&A Section */
-.qa {
-    margin: 40px;
-}
-
-.question {
+  .letter-card {
+    max-width: 700px;
+    margin: 0 auto;
     background: white;
-    color: #ff4d6d;
-    padding: 15px;
-    margin: 10px auto;
-    width: 60%;
-    border-radius: 15px;
-    cursor: pointer;
-    font-weight: bold;
-}
+    border-radius: 30px;
+    padding: 50px 40px;
+    box-shadow: 0 25px 70px rgba(201,24,74,0.12);
+    position: relative;
+    border: 1px solid rgba(255,107,138,0.15);
+  }
 
-.answer {
+  .letter-card::before {
+    content: '💌';
+    font-size: 60px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .letter-card p {
+    font-size: 18px;
+    line-height: 1.9;
+    color: #6b3048;
+  }
+
+  .signature {
+    margin-top: 30px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--rose);
+    text-align: right;
+  }
+
+  /* ─── QA ─── */
+  .qa-section {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+  }
+
+  .qa-grid {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .qa-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(201,24,74,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .qa-card:hover { transform: translateY(-3px); }
+
+  .qa-question {
+    padding: 18px 25px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--deep);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #fff0f4, #fff6f8);
+    border-bottom: 1px solid rgba(255,107,138,0.1);
+  }
+
+  .qa-arrow {
+    transition: transform 0.3s;
+    font-size: 14px;
+  }
+
+  .qa-card.open .qa-arrow { transform: rotate(180deg); }
+
+  .qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+    padding: 0 25px;
+    color: var(--rose);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .qa-card.open .qa-answer {
+    max-height: 100px;
+    padding: 18px 25px;
+  }
+
+  /* ─── PROPOSAL ─── */
+  .proposal-section {
+    background: linear-gradient(160deg, #2d0a16 0%, #5c1a30 50%, #8b2a47 100%);
+    padding: 100px 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .proposal-section .section-title {
+    color: var(--gold);
+    font-size: 42px;
+    text-shadow: 0 0 30px rgba(255,215,0,0.4);
+  }
+
+  .proposal-section .section-title::after {
+    background: linear-gradient(90deg, var(--gold), #ffeb80);
+  }
+
+  .ring-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0 40px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50%      { transform: translateY(-15px) rotate(5deg); }
+  }
+
+  .ring-emoji {
+    font-size: 80px;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
+  }
+
+  .proposal-text {
+    color: rgba(255,220,230,0.9);
+    font-size: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    line-height: 1.8;
+  }
+
+  .proposal-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 52px);
+    color: white;
+    margin: 30px 0 40px;
+    text-shadow: 0 0 40px rgba(255,107,138,0.5);
+  }
+
+  .proposal-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-yes {
+    padding: 18px 55px;
+    font-size: 22px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--rose), var(--deep));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(255,107,138,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-yes::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    border-radius: inherit;
+  }
+
+  .btn-yes:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 18px 55px rgba(255,107,138,0.65);
+  }
+
+  .btn-no {
+    padding: 18px 45px;
+    font-size: 22px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    background: transparent;
+    color: rgba(255,200,210,0.7);
+    border: 2px solid rgba(255,200,210,0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: absolute; /* will be moved by JS */
+  }
+
+  .btn-no:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .proposal-result {
     display: none;
-    margin-bottom: 20px;
-}
+    margin-top: 40px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .proposal-result.visible { display: block; }
+
+  .proposal-result h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(255,215,0,0.5);
+    margin-bottom: 15px;
+  }
+
+  .proposal-result p {
+    color: rgba(255,220,230,0.9);
+    font-size: 20px;
+    line-height: 1.8;
+  }
+
+  .confetti-burst {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #1a0008;
+    color: rgba(255,200,210,0.6);
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer span { color: var(--rose); font-size: 18px; }
 </style>
 </head>
-
 <body>
 
-<h1>🎂 Happy Birthday Thangameey 💖</h1>
+<canvas id="petals-canvas"></canvas>
 
-<p>You are the most beautiful part of my life 🌸</p>
-
-<!-- Photo Gallery -->
-<div class="gallery">
-    <img src="Photo1.JPG">
-    <img src="Photo2.JPG">
-    <img src="Photo3.JPG">
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="sparkle-ring"></div>
+  <div class="hero-content">
+    <span class="emoji-top">🎂</span>
+    <h1>Happy Birthday<br><span>Thangameey</span></h1>
+    <p class="subtitle">🌸 You are the most beautiful part of my life 🌸</p>
+  </div>
+  <div class="scroll-hint">💫</div>
 </div>
 
-<!-- Love Letter Section -->
-<div class="letter">
-    <h2>💌 Love Letter</h2>
+<!-- ── GALLERY ── -->
+<section class="gallery-section">
+  <h2 class="section-title">📸 Our Memories</h2>
+  <div class="gallery">
+    <div class="photo-frame">
+      <img src="Photo1.JPG" alt="Memory 1">
+      <span class="photo-label">✨</span>
+    </div>
+    <div class="photo-frame">
+      <img src="Photo2.JPG" alt="Memory 2">
+      <span class="photo-label">🌸</span>
+    </div>
+    <div class="photo-frame">
+      <img src="Photo3.JPG" alt="Memory 3">
+      <span class="photo-label">💖</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOVE LETTER ── -->
+<section class="letter-section">
+  <h2 class="section-title">A Letter For You</h2>
+  <div class="letter-card">
     <p>
-        From the moment you came into my life, everything became brighter.
-        Your smile is my favorite sight, your laugh is my favorite sound,
-        and your happiness is my biggest wish.
-        <br><br>
-        On your birthday, I just want to remind you how deeply special you are to me.
-        I promise to love you endlessly.You are my favourite Incompelete wish..!!
-        <br><br>
-        Happy Birthday,Tharkuri..!! ❤️
+      From the moment you came into my life, everything became brighter.
+      Your smile is my favorite sight, your laugh is my favorite sound,
+      and your happiness is my biggest wish.
+      <br><br>
+      On your birthday, I just want to remind you how deeply special you are to me.
+      I promise to love you endlessly. You are my favourite incomplete wish..!!
+      <br><br>
+      Every day with you feels like a gift I never want to return. 
+      You make ordinary moments feel like magic, and I am so grateful 
+      that fate chose you for me. 💕
     </p>
-</div>
+    <div class="signature">— Always yours ❤️</div>
+  </div>
+</section>
 
-<!-- Q&A Section -->
-<div class="qa">
-    <h2>❓ Fun Questions</h2>
-
-    <div class="question" onclick="toggleAnswer(0)">
-        💖 Who loves you the most?
+<!-- ── Q&A ── -->
+<section class="qa-section">
+  <h2 class="section-title">❓ Fun Questions</h2>
+  <div class="qa-grid">
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-question">💖 Who loves you the most? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">👉 Me! Always and forever 😘</div>
     </div>
-    <div class="answer">👉 Me! Always and forever 😘</div>
-
-    <div class="question" onclick="toggleAnswer(1)">
-        🌍 Who is the most beautiful person today?
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-question">🌍 Who is the most beautiful person today? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">👉 YOU! It's your special day 🌸</div>
     </div>
-    <div class="answer">👉 YOU! It’s your special day 🌸</div>
-
-    <div class="question" onclick="toggleAnswer(2)">
-        🎁 Who deserves all happiness?
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-question">🎁 Who deserves all the happiness in the world? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">👉 My birthday star ⭐ — you do!</div>
     </div>
-    <div class="answer">👉 My birthday star ⭐</div>
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-question">🎂 What's your wish for today? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">👉 That you smile all day & feel deeply loved 💖</div>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- ── PROPOSAL ── -->
+<section class="proposal-section" id="proposal">
+  <h2 class="section-title">💍 A Special Moment</h2>
+
+  <div class="ring-container">
+    <span class="ring-emoji">💍</span>
+  </div>
+
+  <p class="proposal-text">
+    Of all the stars in the sky, you are the one I'd choose every time.
+    You make my heart feel things I never thought possible.
+    On this beautiful day of yours, I have something to ask you...
+  </p>
+
+  <div class="proposal-question" id="proposal-question">
+    Will you be mine, forever? 🌹
+  </div>
+
+  <div class="proposal-buttons" id="proposal-buttons">
+    <button class="btn-yes" onclick="sayYes()">💖 Yes, forever!</button>
+    <button class="btn-no" id="btn-no" onclick="moveNo()">Maybe no 😅</button>
+  </div>
+
+  <div class="proposal-result" id="proposal-result">
+    <h2>Aww..!! HE said YES! 🎉💍</h2>
+    <p>
+      My heart is the happiest it has ever been! 🥹<br>
+      I promise to be your person — in every adventure, every storm, every ordinary Tuesday.<br>
+      Thank you for making my life extraordinary. ❤️
+    </p>
+    <br>
+    <span style="font-size:60px;">🥂💐🎊💖✨</span>
+  </div>
+</section>
+
+<canvas class="confetti-burst" id="confetti-canvas"></canvas>
+
+<footer>
+  Made with <span>❤️</span> just for Thangameey &nbsp;|&nbsp; Happy Birthday 🎂
+</footer>
 
 <script>
-// Floating hearts generator
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
-    document.body.appendChild(heart);
+/* ── Floating petals / hearts ── */
+const canvas = document.getElementById('petals-canvas');
+const ctx    = canvas.getContext('2d');
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
+const emojis = ['💖','🌸','💕','✨','🌷','💗','🩷'];
+const particles = Array.from({length: 28}, () => ({
+  x: Math.random() * innerWidth,
+  y: Math.random() * innerHeight,
+  size: 16 + Math.random() * 18,
+  speed: 0.4 + Math.random() * 0.8,
+  drift: (Math.random() - 0.5) * 0.6,
+  emoji: emojis[Math.floor(Math.random() * emojis.length)],
+  opacity: 0.4 + Math.random() * 0.5,
+}));
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.globalAlpha = p.opacity;
+    ctx.font = p.size + 'px serif';
+    ctx.fillText(p.emoji, p.x, p.y);
+    p.y -= p.speed;
+    p.x += p.drift;
+    if (p.y < -30) {
+      p.y = canvas.height + 20;
+      p.x = Math.random() * canvas.width;
+    }
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animatePetals);
 }
-setInterval(createHeart, 300);
+animatePetals();
 
-// Q&A toggle
-function toggleAnswer(index) {
-    const answers = document.querySelectorAll(".answer");
-    answers[index].style.display =
-        answers[index].style.display === "block" ? "none" : "block";
+/* ── Q&A Toggle ── */
+function toggleQA(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.qa-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+/* ── Proposal Logic ── */
+let noClickCount = 0;
+
+function moveNo() {
+  noClickCount++;
+  const btn = document.getElementById('btn-no');
+  // Always escape — answer is Yes! 
+  const maxX = window.innerWidth  - 200;
+  const maxY = window.innerHeight - 100;
+  const newX  = Math.random() * maxX;
+  const newY  = Math.random() * maxY;
+  btn.style.position = 'fixed';
+  btn.style.left = newX + 'px';
+  btn.style.top  = newY + 'px';
+  btn.style.transition = 'left 0.2s, top 0.2s';
+  btn.style.zIndex = 999;
+
+  if (noClickCount >= 4) {
+    btn.style.display = 'none';
+    sayYes();
+  }
+}
+
+function sayYes() {
+  document.getElementById('proposal-buttons').style.display = 'none';
+  document.getElementById('proposal-question').style.display = 'none';
+  const result = document.getElementById('proposal-result');
+  result.classList.add('visible');
+  launchConfetti();
+}
+
+/* ── Confetti ── */
+function launchConfetti() {
+  const cc  = document.getElementById('confetti-canvas');
+  cc.width  = window.innerWidth;
+  cc.height = window.innerHeight;
+  const cx  = cc.getContext('2d');
+  const pieces = Array.from({length: 120}, () => ({
+    x:  Math.random() * cc.width,
+    y: -20,
+    w:  8 + Math.random() * 10,
+    h:  8 + Math.random() * 10,
+    color: ['#ff6b8a','#ffd700','#c9184a','#ff9fc5','#fff','#ff3366'][Math.floor(Math.random()*6)],
+    rot:   Math.random() * 360,
+    vx:    (Math.random()-0.5)*6,
+    vy:    3 + Math.random()*5,
+    vr:    (Math.random()-0.5)*8,
+  }));
+  let done = false;
+  function drawConfetti() {
+    cx.clearRect(0, 0, cc.width, cc.height);
+    pieces.forEach(p => {
+      cx.save();
+      cx.translate(p.x, p.y);
+      cx.rotate(p.rot * Math.PI / 180);
+      cx.fillStyle = p.color;
+      cx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      cx.restore();
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.rot += p.vr;
+      p.vy += 0.08;
+      if (p.y > cc.height + 20) { p.y = -20; p.x = Math.random()*cc.width; }
+    });
+    if (!done) requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+  setTimeout(() => {
+    done = true;
+    cx.clearRect(0, 0, cc.width, cc.height);
+  }, 6000);
 }
 </script>
-
 </body>
-
 </html>
-
-
-
-
